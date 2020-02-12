@@ -1,99 +1,70 @@
-FROM tomcat:9-jre8
-MAINTAINER GeoNode Development Team
+FROM tomcat:9-jdk11
 
-#
-# Set GeoServer version and data directory
-#
+MAINTAINER SolSpec Development Team
+
+# Set Environment variables
+ENV GEOSERVER_VERSION="2.16.2"
 ENV GEOSERVER_TAG="latest"
-ENV GEOSERVER_VERSION="2.16.x"
-ENV GEOSERVER_DATA_DIR="/geoserver_data/data"
-ENV GEOSERVER_BACKUP_DIR="/geoserver_backup/backup"
-ENV GEOSERVER_BASE_DIR="/geoserver_data"
+ENV GEOSERVER_DATA_DIR=/var/local/geoserver
+ENV GEOSERVER_INSTALL_DIR=/usr/local/geoserver
+ENV GEOSERVER_EXT_DIR=/var/local/geoserver-exts
 ENV GEOSERVER_CSRF_WHITELIST="geo.solspec.io"
-# Download and install GeoServer
-#
-RUN cd /usr/local/tomcat/webapps \
-    && wget --no-check-certificate --progress=bar:force:noscroll \
-    https://build.geo-solutions.it/geonode/geoserver/latest/geoserver-${GEOSERVER_VERSION}.war \
-    && unzip -q geoserver-${GEOSERVER_VERSION}.war -d geoserver \
-    && wget --progress=bar:force:noscroll \
-    https://build.geoserver.org/geoserver/master/community-latest/geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
-    && unzip -q -n geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip -d geoserver/WEB-INF/lib \
-    && rm geoserver-${GEOSERVER_VERSION}.war \
-    && rm geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
-    && mkdir -p $GEOSERVER_DATA_DIR 
-RUN mkdir -p ${GEOSERVER_BACKUP_DIR} \
-    && cd ${GEOSERVER_BACKUP_DIR} \
-    && wget --no-check-certificate --progress=bar:force:noscroll \
-    https://build.geo-solutions.it/geonode/geoserver/latest/data-${GEOSERVER_VERSION}.zip
 
-VOLUME $GEOSERVER_DATA_DIR
+ADD conf/geoserver.xml /usr/local/tomcat/conf/Catalina/localhost/geoserver.xml
+RUN mkdir ${GEOSERVER_DATA_DIR} \
+    && mkdir ${GEOSERVER_INSTALL_DIR} \
+        && cd ${GEOSERVER_INSTALL_DIR} \
+        && wget --progress=bar:force:noscroll \
+        http://sourceforge.net/projects/geoserver/files/GeoServer/${GEOSERVER_VERSION}/geoserver-${GEOSERVER_VERSION}-war.zip \
+        && unzip geoserver-${GEOSERVER_VERSION}-war.zip \
+        && unzip geoserver.war \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/master/community-latest/geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
+        && unzip -q -n geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip -d WEB-INF/lib \
+        && rm -rf geoserver-${GEOSERVER_VERSION}-war.zip geoserver.war target *.txt \
+        && rm geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
+        && ls /usr/local/geoserver/
 
-###########docker host###############
-# Set DOCKERHOST variable if DOCKER_HOST exists
-ARG DOCKERHOST=${DOCKERHOST}
-# for debugging
-RUN echo -n #1===>DOCKERHOST=${DOCKERHOST}
-#
-ENV DOCKERHOST ${DOCKERHOST}
-# for debugging
-RUN echo -n #2===>DOCKERHOST=${DOCKERHOST}
+# Enable CORS
+RUN sed -i '\:</web-app>:i\
+<filter>\n\
+    <filter-name>CorsFilter</filter-name>\n\
+    <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>\n\
+    <init-param>\n\
+        <param-name>cors.allowed.origins</param-name>\n\
+        <param-value>*</param-value>\n\
+    </init-param>\n\
+    <init-param>\n\
+        <param-name>cors.allowed.methods</param-name>\n\
+        <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>\n\
+    </init-param>\n\
+</filter>\n\
+<filter-mapping>\n\
+    <filter-name>CorsFilter</filter-name>\n\
+    <url-pattern>/*</url-pattern>\n\
+</filter-mapping>' ${GEOSERVER_INSTALL_DIR}/WEB-INF/web.xml
 
-###########docker host ip#############
-# Set GEONODE_HOST_IP address if it exists
-ARG GEONODE_HOST_IP=${GEONODE_HOST_IP}
-# for debugging
-RUN echo -n #1===>GEONODE_HOST_IP=${GEONODE_HOST_IP}
-#
-ENV GEONODE_HOST_IP ${GEONODE_HOST_IP}
-# for debugging
-RUN echo -n #2===>GEONODE_HOST_IP=${GEONODE_HOST_IP}
-# If empty set DOCKER_HOST_IP to GEONODE_HOST_IP
-ENV DOCKER_HOST_IP=${DOCKER_HOST_IP:-${GEONODE_HOST_IP}}
-# for debugging
-RUN echo -n #1===>DOCKER_HOST_IP=${DOCKER_HOST_IP}
-# Trying to set the value of DOCKER_HOST_IP from DOCKER_HOST
-RUN if ! [ -z ${DOCKER_HOST_IP} ]; \
-    then echo export DOCKER_HOST_IP=${DOCKERHOST} | \
-    sed 's/tcp:\/\/\([^:]*\).*/\1/' >> /root/.bashrc; \
-    else echo "DOCKER_HOST_IP is already set!"; fi
-# for debugging
-RUN echo -n #2===>DOCKER_HOST_IP=${DOCKER_HOST_IP}
+# Tomcat environment
+ENV CATALINA_OPTS "-server -Djava.awt.headless=true \
+        -XX:MaxPermSize=512m -Xms512m -Xmx2048m \
+        -XX:+UseConcMarkSweepGC \
+        -XX:NewSize=48m -XX:PermSize=256m \
+        -XX:ParallelGCThreads=4 -Dfile.encoding=UTF8 \
+        -Duser.timezone=GMT \
+        -Djavax.servlet.request.encoding=UTF-8 \
+        -Djavax.servlet.response.encoding=UTF-8 \
+        -DGEOSERVER_DATA_DIR=${GEOSERVER_DATA_DIR} \
+        -DGEOSERVER_CSRF_WHITELIST=${GEOSERVER_CSRF_WHITELIST}"
 
-# Set WEBSERVER public port
-ARG PUBLIC_PORT=${PUBLIC_PORT}
-# for debugging
-RUN echo -n #1===>PUBLIC_PORT=${PUBLIC_PORT}
-#
-ENV PUBLIC_PORT=${PUBLIC_PORT}
-# for debugging
-RUN echo -n #2===>PUBLIC_PORT=${PUBLIC_PORT}
+# Create tomcat user to avoid root access
+RUN addgroup --gid 1099 tomcat && useradd -m -u 1099 -g tomcat tomcat \
+    && chown -R tomcat:tomcat . \
+    && chown -R tomcat:tomcat ${GEOSERVER_DATA_DIR} \
+    && chown -R tomcat:tomcat ${GEOSERVER_INSTALL_DIR}
 
-# set nginx base url for geoserver
-RUN echo export NGINX_BASE_URL=http://${NGINX_HOST}:${NGINX_PORT}/ | \
-    sed 's/tcp:\/\/\([^:]*\).*/\1/' >> /root/.bashrc
+ADD start.sh /usr/local/bin/start.sh
+ENTRYPOINT [ "/bin/sh", "/usr/local/bin/start.sh" ]
 
-# copy the script and perform the run of scripts from entrypoint.sh
-RUN mkdir -p /usr/local/tomcat/tmp
-WORKDIR /usr/local/tomcat/tmp
-COPY set_geoserver_auth.sh /usr/local/tomcat/tmp
-COPY setup_auth.sh /usr/local/tomcat/tmp
-COPY requirements.txt /usr/local/tomcat/tmp
-COPY get_dockerhost_ip.py /usr/local/tomcat/tmp
-COPY get_nginxhost_ip.py /usr/local/tomcat/tmp
-COPY entrypoint.sh /usr/local/tomcat/tmp
+VOLUME ["${GEOSERVER_DATA_DIR}", "${GEOSERVER_EXT_DIR}"]
 
-RUN apt-get update \
-    && apt-get -y upgrade \
-    && apt-get install -y python python-pip python-dev \
-    && chmod +x /usr/local/tomcat/tmp/set_geoserver_auth.sh \
-    && chmod +x /usr/local/tomcat/tmp/setup_auth.sh \
-    && chmod +x /usr/local/tomcat/tmp/entrypoint.sh \
-    && pip install pip==9.0.3 \
-    && pip install -r requirements.txt \
-    && chmod +x /usr/local/tomcat/tmp/get_dockerhost_ip.py \
-    && chmod +x /usr/local/tomcat/tmp/get_nginxhost_ip.py
-
-ENV JAVA_OPTS="-Djava.awt.headless=true -XX:MaxPermSize=512m -XX:PermSize=256m -Xms512m -Xmx2048m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=4 -Dfile.encoding=UTF8 -Duser.timezone=GMT -Djavax.servlet.request.encoding=UTF-8 -Djavax.servlet.response.encoding=UTF-8 -Duser.timezone=GMT -Dorg.geotools.shapefile.datetime=true"
-
-CMD ["/usr/local/tomcat/tmp/entrypoint.sh"]
+EXPOSE 8080
