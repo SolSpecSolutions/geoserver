@@ -4,9 +4,10 @@ MAINTAINER GeoNode Development Team
 #
 # Set GeoServer version and data directory
 #
-ENV GEOSERVER_VERSION=2.16.x
+ENV GEOSERVER_TAG="latest"
+ENV GEOSERVER_VERSION="2.16.x"
 ENV GEOSERVER_DATA_DIR="/geoserver_data/data"
-ENV GEOSERVER_BACKUP_DIR="/geoserver_data/backup"
+ENV GEOSERVER_BACKUP_DIR="/geoserver_backup/backup"
 ENV GEOSERVER_BASE_DIR="/geoserver_data"
 ENV GEOSERVER_CSRF_WHITELIST="geo.solspec.io"
 # Download and install GeoServer
@@ -15,7 +16,11 @@ RUN cd /usr/local/tomcat/webapps \
     && wget --no-check-certificate --progress=bar:force:noscroll \
     https://build.geo-solutions.it/geonode/geoserver/latest/geoserver-${GEOSERVER_VERSION}.war \
     && unzip -q geoserver-${GEOSERVER_VERSION}.war -d geoserver \
+    && wget --progress=bar:force:noscroll \
+    https://build.geoserver.org/geoserver/master/community-latest/geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
+    && unzip -q -n geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip -d geoserver/WEB-INF/lib \
     && rm geoserver-${GEOSERVER_VERSION}.war \
+    && rm geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
     && mkdir -p $GEOSERVER_DATA_DIR 
 RUN mkdir -p ${GEOSERVER_BACKUP_DIR} \
     && cd ${GEOSERVER_BACKUP_DIR} \
