@@ -1,4 +1,4 @@
-FROM tomcat:9-jdk11
+FROM tomcat:9-jdk8
 
 MAINTAINER SolSpec Development Team
 
