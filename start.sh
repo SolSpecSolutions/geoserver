@@ -19,6 +19,15 @@ chown -R tomcat:tomcat ${GEOSERVER_EXT_DIR}
 for ext in `ls -d "${GEOSERVER_EXT_DIR}"/*/`; do
     su tomcat -c "cp "${ext}"*.jar /usr/local/geoserver/WEB-INF/lib"
 done
-python /user/local/bin/keycloak_config.py
+
 su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
+
+sleep 20
+
+pkill -9 su
+echo "start"
+/usr/bin/python /user/local/bin/keycloak_config.py
+
+su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
+
 
