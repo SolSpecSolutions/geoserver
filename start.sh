@@ -20,14 +20,11 @@ for ext in `ls -d "${GEOSERVER_EXT_DIR}"/*/`; do
     su tomcat -c "cp "${ext}"*.jar /usr/local/geoserver/WEB-INF/lib"
 done
 
-timeout 40s su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
-sleep 15
+timeout 60s su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
+pkill -u tomcat
 
-#rm -Rf /usr/local/tomcat/work/Catalina/localhost/geoserver/*
-apt-get update
-apt-get install vim -y
 /usr/bin/python /user/local/bin/keycloak_config.py
-sleep 60
+
 su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
 
 
