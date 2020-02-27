@@ -47,6 +47,6 @@ keycloak_config.getElementsByTagName("id")[0].firstChild.nodeValue = id
 
 os.makedirs("/var/local/geoserver/security/filter/keycloak-adapter")
 
-file_handle = open("/var/local/geoserver/security/config.xml","wb")
+file_handle = open("/var/local/geoserver/security/filter/keycloak-adapter/config.xml","wb")
 keycloak_config.writexml(file_handle)
 file_handle.close()
