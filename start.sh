@@ -23,7 +23,7 @@ done
 timeout 40s su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
 sleep 15
 /usr/bin/python /user/local/bin/keycloak_config.py
-
+rm -Rf /usr/local/tomcat/work/Catalina/localhost/geoserver/wicket-filestore/*
 su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
 
 
