@@ -21,6 +21,7 @@ for ext in `ls -d "${GEOSERVER_EXT_DIR}"/*/`; do
 done
 
 su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
+sleep 20
 pkill -9 tomcat
 pkill -9 catalina.sh
 python /user/local/bin/keycloak_config.py
