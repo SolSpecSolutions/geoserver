@@ -22,8 +22,12 @@ done
 
 timeout 40s su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
 sleep 15
+
+#rm -Rf /usr/local/tomcat/work/Catalina/localhost/geoserver/*
+apt-get update
+apt-get install vim -y
 /usr/bin/python /user/local/bin/keycloak_config.py
-rm -Rf /usr/local/tomcat/work/Catalina/localhost/geoserver/*
+sleep 60
 su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
 
 
