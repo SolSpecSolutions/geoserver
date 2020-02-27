@@ -65,6 +65,8 @@ RUN addgroup --gid 1099 tomcat && useradd -m -u 1099 -g tomcat tomcat \
 # Modify tomcat server.xml file to deal with reverse proxy
 RUN sed -i 's/"8443"/"8443" SSLEnabled="false" scheme="https" secure="true" /' /usr/local/tomcat/conf/server.xml
 
+ADD keycloak_config.py /user/local/bin/keycloak_config.py
+RUN python /user/local/bin/keycloak_config.py
 
 ADD start.sh /usr/local/bin/start.sh
 ENTRYPOINT [ "/bin/sh", "/usr/local/bin/start.sh" ]
