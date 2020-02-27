@@ -20,12 +20,7 @@ for ext in `ls -d "${GEOSERVER_EXT_DIR}"/*/`; do
     su tomcat -c "cp "${ext}"*.jar /usr/local/geoserver/WEB-INF/lib"
 done
 
-su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
-
-sleep 20
-
-pkill -9 su
-echo "start"
+timeout 20s su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
 /usr/bin/python /user/local/bin/keycloak_config.py
 
 su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
