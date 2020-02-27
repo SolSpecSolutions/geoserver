@@ -21,6 +21,7 @@ for ext in `ls -d "${GEOSERVER_EXT_DIR}"/*/`; do
 done
 
 timeout 20s su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
+sleep 15
 /usr/bin/python /user/local/bin/keycloak_config.py
 
 su tomcat -c "/usr/local/tomcat/bin/catalina.sh run"
