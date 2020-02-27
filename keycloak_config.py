@@ -2,8 +2,8 @@
 from xml.dom import minidom
 import os
 
-main_config = minidom.parse("main_config.xml")
-ssl_config = minidom.parse("ssl_config.xml")
+main_config = minidom.parse("/var/local/geoserver/security/config.xml")
+ssl_config = minidom.parse("/var/local/geoserver/security/filter/sslFilter/config.xml")
 
 filters = main_config.getElementsByTagName("filters")
 
