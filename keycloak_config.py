@@ -30,12 +30,12 @@ xmlString = """<keycloakAdapter>
   <name>keycloak-adapter</name>
   <className>org.geoserver.security.keycloak.GeoServerKeycloakFilter</className>
   <adapterConfig>{&#xd;
-  &quot;realm&quot;: &quot;SolSpec&quot;,&#xd;
+  &quot;realm&quot;: &quot;CHANGEREALM&quot;,&#xd;
   &quot;auth-server-url&quot;: &quot;https://keycloak.solspec.io/auth/&quot;,&#xd;
   &quot;ssl-required&quot;: &quot;external&quot;,&#xd;
   &quot;resource&quot;: &quot;geoserver-client&quot;,&#xd;
   &quot;credentials&quot;: {&#xd;
-    &quot;secret&quot;: &quot;27ab0535-97cc-4a6f-b052-e0c17eddc035&quot;&#xd;
+    &quot;secret&quot;: &quot;CHANGESECRET&quot;&#xd;
   },&#xd;
   &quot;use-resource-role-mappings&quot;: true,&#xd;
   &quot;confidential-port&quot;: 0&#xd;
