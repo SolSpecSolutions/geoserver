@@ -27,24 +27,24 @@ id = ssl_config.getElementsByTagName("id")[0].firstChild.nodeValue[:-1] + str(in
 secret = os.getenv('keycloak_secret')
 realm = os.environ.get('keycloak_realm')
 
-xmlString = """<keycloakAdapter>
+xmlString = f"""<keycloakAdapter>
   <id>4c017111:17062f9f24d:-7fe5</id>
   <name>keycloak-adapter</name>
   <className>org.geoserver.security.keycloak.GeoServerKeycloakFilter</className>
   <adapterConfig>{&#xd;
-  &quot;realm&quot;: &quot;{0}&quot;,&#xd;
+  &quot;realm&quot;: &quot;{realm}&quot;,&#xd;
   &quot;auth-server-url&quot;: &quot;https://keycloak.solspec.io/auth/&quot;,&#xd;
   &quot;ssl-required&quot;: &quot;external&quot;,&#xd;
   &quot;resource&quot;: &quot;geoserver-client&quot;,&#xd;
   &quot;credentials&quot;: {&#xd;
-    &quot;secret&quot;: &quot;{1}&quot;&#xd;
+    &quot;secret&quot;: &quot;{secret}&quot;&#xd;
   },&#xd;
   &quot;use-resource-role-mappings&quot;: true,&#xd;
   &quot;confidential-port&quot;: 0&#xd;
 }</adapterConfig>
 </keycloakAdapter>"""
 
-keycloak_config = minidom.parseString(xmlString.format(realm, secret))
+keycloak_config = minidom.parseString(xmlString)
 keycloak_config.getElementsByTagName("id")[0].firstChild.nodeValue = id
 
 os.makedirs("/var/local/geoserver/security/filter/keycloak-adapter")
