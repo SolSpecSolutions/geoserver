@@ -19,7 +19,7 @@ RUN mkdir ${GEOSERVER_DATA_DIR} \
         && unzip geoserver-${GEOSERVER_VERSION}-war.zip \
         && unzip geoserver.war \
         && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/master/community-latest/geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-sec-keycloak-plugin.zip \
         && unzip -q -n geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip -d WEB-INF/lib \
         && rm -rf geoserver-${GEOSERVER_VERSION}-war.zip geoserver.war target *.txt \
         && rm geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
@@ -27,6 +27,62 @@ RUN mkdir ${GEOSERVER_DATA_DIR} \
         https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-s3-geotiff-plugin.zip \
         && unzip -q -n geoserver-2.16-SNAPSHOT-s3-geotiff-plugin.zip -d WEB-INF/lib \
         && rm geoserver-2.16-SNAPSHOT-s3-geotiff-plugin.zip \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-gwc-s3-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-gwc-s3-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-gwc-s3-plugin.zip \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-gwc-sqlite-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-gwc-sqlite-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-gwc-sqlite-plugin.zip \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-python-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-python-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-python-plugin.zip  \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-pgraster-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-pgraster-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-pgraster-plugin.zip  \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-taskmanager-s3-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-taskmanager-s3-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-taskmanager-s3-plugin.zip  \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip  \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip  \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-gdal-wcs-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-gdal-wcs-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-gdal-wcs-plugin.zip  \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-gdal-wps-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-gdal-wps-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-gdal-wps-plugin.zip  \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip  \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wps-download-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-wps-download-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-wps-download-plugin.zip \
+        && wget --progress=bar:force:noscroll \
+        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip \
+        && unzip -q -n geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip -d WEB-INF/lib \
+        && rm geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip \
         && ls /usr/local/geoserver/
 
 # Enable CORS
