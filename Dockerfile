@@ -63,27 +63,27 @@ RUN mkdir ${GEOSERVER_DATA_DIR} \
 #        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-gdal-wps-plugin.zip \
 #        && unzip -q -n geoserver-2.16-SNAPSHOT-gdal-wps-plugin.zip -d WEB-INF/lib \
 #        && rm geoserver-2.16-SNAPSHOT-gdal-wps-plugin.zip  \
-        && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip \
-        && unzip -q -n geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip -d WEB-INF/lib \
-        && rm geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip \
-        && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip  \
-        && unzip -q -n geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip -d WEB-INF/lib \
-        && rm geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip \
-        && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip \
-        && unzip -q -n geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip -d WEB-INF/lib \
-        && rm geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip \
-        && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wps-download-plugin.zip \
-        && unzip -q -n geoserver-2.16-SNAPSHOT-wps-download-plugin.zip -d WEB-INF/lib \
-        && rm geoserver-2.16-SNAPSHOT-wps-download-plugin.zip \
-        && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip \
-        && unzip -q -n geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip -d WEB-INF/lib \
-        && rm geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip \
-        && ls /usr/local/geoserver/
+#        && wget --progress=bar:force:noscroll \
+#        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip \
+#        && unzip -q -n geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip -d WEB-INF/lib \
+#        && rm geoserver-2.16-SNAPSHOT-backup-restore-plugin.zip \
+#        && wget --progress=bar:force:noscroll \
+#        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip  \
+#        && unzip -q -n geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip -d WEB-INF/lib \
+#        && rm geoserver-2.16-SNAPSHOT-wmts-styles-plugin.zip \
+#        && wget --progress=bar:force:noscroll \
+#        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip \
+#        && unzip -q -n geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip -d WEB-INF/lib \
+#        && rm geoserver-2.16-SNAPSHOT-wmts-multi-dimensional-plugin.zip \
+#        && wget --progress=bar:force:noscroll \
+#        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-wps-download-plugin.zip \
+#        && unzip -q -n geoserver-2.16-SNAPSHOT-wps-download-plugin.zip -d WEB-INF/lib \
+#        && rm geoserver-2.16-SNAPSHOT-wps-download-plugin.zip \
+#        && wget --progress=bar:force:noscroll \
+#        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip \
+#        && unzip -q -n geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip -d WEB-INF/lib \
+#        && rm geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip \
+#        && ls /usr/local/geoserver/
 
 # Enable CORS
 RUN sed -i '\:</web-app>:i\
