@@ -83,7 +83,7 @@ RUN mkdir ${GEOSERVER_DATA_DIR} \
 #        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip \
 #        && unzip -q -n geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip -d WEB-INF/lib \
 #        && rm geoserver-2.16-SNAPSHOT-web-resource-browser-plugin.zip \
-#        && ls /usr/local/geoserver/
+        && ls /usr/local/geoserver/
 
 # Enable CORS
 RUN sed -i '\:</web-app>:i\
