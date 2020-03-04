@@ -47,7 +47,7 @@ RUN mkdir ${GEOSERVER_DATA_DIR} \
         https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-taskmanager-s3-plugin.zip \
         && unzip -q -n geoserver-2.16-SNAPSHOT-taskmanager-s3-plugin.zip -d WEB-INF/lib \
         && rm geoserver-2.16-SNAPSHOT-taskmanager-s3-plugin.zip  \
-        && wget --progress=bar:force:noscroll \
+#        && wget --progress=bar:force:noscroll \
 #        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip \
 #        && unzip -q -n geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip -d WEB-INF/lib \
 #        && rm geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip  \
