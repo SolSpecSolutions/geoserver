@@ -23,6 +23,7 @@ RUN mkdir ${GEOSERVER_DATA_DIR} \
         && unzip -q -n geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip -d WEB-INF/lib \
         && rm -rf geoserver-${GEOSERVER_VERSION}-war.zip geoserver.war target *.txt \
         && rm geoserver-2.17-SNAPSHOT-sec-keycloak-plugin.zip \
+        && wget --progress=bar:force:noscroll \
         https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-s3-geotiff-plugin.zip \
         && unzip -q -n geoserver-2.16-SNAPSHOT-s3-geotiff-plugin.zip -d WEB-INF/lib \
         && rm geoserver-2.16-SNAPSHOT-s3-geotiff-plugin.zip \
