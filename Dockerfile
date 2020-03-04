@@ -48,13 +48,13 @@ RUN mkdir ${GEOSERVER_DATA_DIR} \
         && unzip -q -n geoserver-2.16-SNAPSHOT-taskmanager-s3-plugin.zip -d WEB-INF/lib \
         && rm geoserver-2.16-SNAPSHOT-taskmanager-s3-plugin.zip  \
         && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip \
-        && unzip -q -n geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip -d WEB-INF/lib \
-        && rm geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip  \
-        && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip \
-        && unzip -q -n geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip -d WEB-INF/lib \
-        && rm geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip  \
+#        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip \
+#        && unzip -q -n geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip -d WEB-INF/lib \
+#        && rm geoserver-2.16-SNAPSHOT-mbtiles-plugin.zip  \
+#        && wget --progress=bar:force:noscroll \
+#        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip \
+#        && unzip -q -n geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip -d WEB-INF/lib \
+#        && rm geoserver-2.16-SNAPSHOT-mbstyle-plugin.zip  \
 #        && wget --progress=bar:force:noscroll \
 #        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-gdal-wcs-plugin.zip \
 #        && unzip -q -n geoserver-2.16-SNAPSHOT-gdal-wcs-plugin.zip -d WEB-INF/lib \
