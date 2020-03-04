@@ -35,10 +35,10 @@ RUN mkdir ${GEOSERVER_DATA_DIR} \
         https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-gwc-sqlite-plugin.zip \
         && unzip -q -n geoserver-2.16-SNAPSHOT-gwc-sqlite-plugin.zip -d WEB-INF/lib \
         && rm geoserver-2.16-SNAPSHOT-gwc-sqlite-plugin.zip \
-        && wget --progress=bar:force:noscroll \
-        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-python-plugin.zip \
-        && unzip -q -n geoserver-2.16-SNAPSHOT-python-plugin.zip -d WEB-INF/lib \
-        && rm geoserver-2.16-SNAPSHOT-python-plugin.zip  \
+#        && wget --progress=bar:force:noscroll \
+#        https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-python-plugin.zip \
+#        && unzip -q -n geoserver-2.16-SNAPSHOT-python-plugin.zip -d WEB-INF/lib \
+#        && rm geoserver-2.16-SNAPSHOT-python-plugin.zip  \
         && wget --progress=bar:force:noscroll \
         https://build.geoserver.org/geoserver/2.16.x/community-latest/geoserver-2.16-SNAPSHOT-pgraster-plugin.zip \
         && unzip -q -n geoserver-2.16-SNAPSHOT-pgraster-plugin.zip -d WEB-INF/lib \
