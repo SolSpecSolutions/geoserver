@@ -5,10 +5,10 @@ MAINTAINER SolSpec Development Team
 # Set Environment variables
 ENV GEOSERVER_VERSION="2.16.2"
 ENV GEOSERVER_TAG="latest"
-ENV GEOSERVER_DATA_DIR=/var/local/geoserver-install
+ENV GEOSERVER_DATA_DIR=/var/geoserver-install
 ENV GEOSERVER_DATA_DIR_1=/var/local/geoserver
 ENV GEOSERVER_INSTALL_DIR=/usr/local/geoserver
-ENV GEOSERVER_EXT_DIR=/var/local/geoserver-exts-install
+ENV GEOSERVER_EXT_DIR=/var/geoserver-exts-install
 ENV GEOSERVER_EXT_DIR_1=/var/local/geoserver-exts
 ENV GEOSERVER_CSRF_WHITELIST="geo.solspec.io"
 
