@@ -5,9 +5,9 @@ MAINTAINER SolSpec Development Team
 # Set Environment variables
 ENV GEOSERVER_VERSION="2.16.2"
 ENV GEOSERVER_TAG="latest"
-ENV GEOSERVER_DATA_DIR=/var/local/geoserver
+ENV GEOSERVER_DATA_DIR=/var/local/geoserver-install
 ENV GEOSERVER_INSTALL_DIR=/usr/local/geoserver
-ENV GEOSERVER_EXT_DIR=/var/local/geoserver-exts
+ENV GEOSERVER_EXT_DIR=/var/local/geoserver-exts-install
 ENV GEOSERVER_CSRF_WHITELIST="geo.solspec.io"
 
 ADD conf/geoserver.xml /usr/local/tomcat/conf/Catalina/localhost/geoserver.xml
@@ -127,6 +127,10 @@ RUN sed -i 's/"8443"/"8443" SSLEnabled="false" scheme="https" secure="true" /' /
 
 ADD keycloak_config.py /user/local/bin/keycloak_config.py
 #RUN python /user/local/bin/keycloak_config.py
+
+ENV GEOSERVER_DATA_DIR=/var/local/geoserver
+ENV GEOSERVER_INSTALL_DIR=/usr/local/geoserver
+ENV GEOSERVER_EXT_DIR=/var/local/geoserver-exts
 
 ADD start.sh /usr/local/bin/start.sh
 ENTRYPOINT [ "/bin/sh", "/usr/local/bin/start.sh" ]
