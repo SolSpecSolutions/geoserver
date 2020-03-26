@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check for Existance of geoserver install, if not then move into place
-if [ ! -d ${GEOSERVER_DATA_DIR} ]; then
+if [ ! -d "${GEOSERVER_DATA_DIR}/logging.xml" ]; then
     mv ${GEOSERVER_DATA_DIR} ${GEOSERVER_DATA_DIR_1}
     mv ${GEOSERVER_EXT_DIR} ${GEOSERVER_EXT_DIR_1}
 fi
