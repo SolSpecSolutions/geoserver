@@ -2,8 +2,8 @@
 
 # Check for Existance of geoserver install, if not then move into place
 if [ ! -d ${GEOSERVER_DATA_DIR} ]; then
-    cp -Rp ${GEOSERVER_DATA_DIR} ${GEOSERVER_DATA_DIR_1}
-    cp -Rp ${GEOSERVER_EXT_DIR} ${GEOSERVER_EXT_DIR_1}
+    mv ${GEOSERVER_DATA_DIR} ${GEOSERVER_DATA_DIR_1}
+    mv ${GEOSERVER_EXT_DIR} ${GEOSERVER_EXT_DIR_1}
 fi
 
 if [ -n "${CUSTOM_UID}" ]; then
