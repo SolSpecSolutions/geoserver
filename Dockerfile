@@ -106,9 +106,9 @@ RUN sed -i '\:</web-app>:i\
 
 # Tomcat environment
 ENV CATALINA_OPTS "-server -Djava.awt.headless=true \
-        -XX:MaxPermSize=512m -Xms512m -Xmx2048m \
+        -XX:MaxPermSize=512m -Xms512m -Xmx16384m \
         -XX:+UseConcMarkSweepGC \
-        -XX:NewSize=48m -XX:PermSize=256m \
+        -XX:NewSize=48m -XX:PermSize=2048m \
         -XX:ParallelGCThreads=4 -Dfile.encoding=UTF8 \
         -Duser.timezone=GMT \
         -Djavax.servlet.request.encoding=UTF-8 \
