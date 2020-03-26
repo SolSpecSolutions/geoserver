@@ -22,7 +22,7 @@ fi
 chown -R tomcat:tomcat ${GEOSERVER_DATA_DIR_1}
 chown -R tomcat:tomcat ${GEOSERVER_EXT_DIR_1}
 
-for ext in `ls -d "${GEOSERVER_EXT_DIR}"/*/`; do
+for ext in `ls -d "${GEOSERVER_EXT_DIR_1}"/*/`; do
     su tomcat -c "cp "${ext}"*.jar /usr/local/geoserver/WEB-INF/lib"
 done
 
