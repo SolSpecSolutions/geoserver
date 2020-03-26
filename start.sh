@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Check for Existance of geoserver install, if not then move into place
-if [ ! -d "${GEOSERVER_DATA_DIR}" ]; then
-    mv ${GEOSERVER_DATA_DIR}-install ${GEOSERVER_DATA_DIR}
-    mv ${GEOSERVER_EXT_DIR}-install ${GEOSERVER_EXT_DIR}
+if [ ! -d ${GEOSERVER_DATA_DIR} ]; then
+    cp -Rp ${GEOSERVER_DATA_DIR}-install ${GEOSERVER_DATA_DIR}
+    cp -Rp ${GEOSERVER_EXT_DIR}-install ${GEOSERVER_EXT_DIR}
 fi
 
 if [ -n "${CUSTOM_UID}" ]; then
