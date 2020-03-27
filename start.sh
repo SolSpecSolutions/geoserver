@@ -1,10 +1,13 @@
 #!/bin/bash
 
 # Check for Existance of geoserver install, if not then move into place
-if [ ! -d "${GEOSERVER_DATA_DIR_1}/logging.xml" ]; then
+if [ ! -f "${GEOSERVER_DATA_DIR_1}/logging.xml" ]; then
     cp -Rp "${GEOSERVER_DATA_DIR}/*" "${GEOSERVER_DATA_DIR_1}/"
     cp -Rp "${GEOSERVER_EXT_DIR}/*" "${GEOSERVER_EXT_DIR_1}/"
 fi
+
+export GEOSERVER_DATA_DIR="/var/local/geoserver"
+export GEOSERVER_EXT_DIR="/var/local/geoserver-exts"
 
 if [ -n "${CUSTOM_UID}" ]; then
     echo "Using custom UID ${CUSTOM_UID}."
