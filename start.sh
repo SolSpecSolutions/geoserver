@@ -1,13 +1,10 @@
 #!/bin/bash
 
 # Check for Existance of geoserver install, if not then move into place
-if [ ! -f "${GEOSERVER_DATA_DIR_1}/logging.xml" ]; then
-    cp -Rp "${GEOSERVER_DATA_DIR}/*" "${GEOSERVER_DATA_DIR_1}/"
-    cp -Rp "${GEOSERVER_EXT_DIR}/*" "${GEOSERVER_EXT_DIR_1}/"
+if [ ! -f "${GEOSERVER_DATA_DIR}/logging.xml" ]; then
+    cp -Rp "${GEOSERVER_DATA_DIR_1}/*" "${GEOSERVER_DATA_DIR}/"
+    cp -Rp "${GEOSERVER_EXT_DIR_1}/*" "${GEOSERVER_EXT_DIR}/"
 fi
-
-export GEOSERVER_DATA_DIR="/var/local/geoserver"
-export GEOSERVER_EXT_DIR="/var/local/geoserver-exts"
 
 if [ -n "${CUSTOM_UID}" ]; then
     echo "Using custom UID ${CUSTOM_UID}."
@@ -22,10 +19,10 @@ if [ -n "${CUSTOM_GID}" ]; then
 fi
 
 # We need this line to ensure that data has the correct rights
-chown -R tomcat:tomcat ${GEOSERVER_DATA_DIR_1}
-chown -R tomcat:tomcat ${GEOSERVER_EXT_DIR_1}
+chown -R tomcat:tomcat ${GEOSERVER_DATA_DIR}
+chown -R tomcat:tomcat ${GEOSERVER_EXT_DIR}
 
-for ext in `ls -d "${GEOSERVER_EXT_DIR_1}"/*/`; do
+for ext in `ls -d "${GEOSERVER_EXT_DIR}"/*/`; do
     su tomcat -c "cp "${ext}"*.jar /usr/local/geoserver/WEB-INF/lib"
 done
 
