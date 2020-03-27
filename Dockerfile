@@ -5,15 +5,15 @@ MAINTAINER SolSpec Development Team
 # Set Environment variables
 ENV GEOSERVER_VERSION="2.16.2"
 ENV GEOSERVER_TAG="latest"
-ENV GEOSERVER_DATA_DIR=/var/geoserver-install
-ENV GEOSERVER_DATA_DIR_1=/var/local/geoserver
+ENV GEOSERVER_DATA_DIR_1=/var/geoserver-install
+ENV GEOSERVER_DATA_DIR=/var/local/geoserver
 ENV GEOSERVER_INSTALL_DIR=/usr/local/geoserver
-ENV GEOSERVER_EXT_DIR=/var/geoserver-exts-install
-ENV GEOSERVER_EXT_DIR_1=/var/local/geoserver-exts
+ENV GEOSERVER_EXT_DIR_1=/var/geoserver-exts-install
+ENV GEOSERVER_EXT_DIR=/var/local/geoserver-exts
 ENV GEOSERVER_CSRF_WHITELIST="geo.solspec.io"
 
 ADD conf/geoserver.xml /usr/local/tomcat/conf/Catalina/localhost/geoserver.xml
-RUN mkdir ${GEOSERVER_DATA_DIR} \
+RUN mkdir ${GEOSERVER_DATA_DIR_1} \
     && mkdir ${GEOSERVER_INSTALL_DIR} \
         && cd ${GEOSERVER_INSTALL_DIR} \
         && wget --progress=bar:force:noscroll \
@@ -121,7 +121,7 @@ ENV CATALINA_OPTS "-server -Djava.awt.headless=true \
 # Create tomcat user to avoid root access
 RUN addgroup --gid 1099 tomcat && useradd -m -u 1099 -g tomcat tomcat \
     && chown -R tomcat:tomcat . \
-    && chown -R tomcat:tomcat ${GEOSERVER_DATA_DIR} \
+    && chown -R tomcat:tomcat ${GEOSERVER_DATA_DIR_1} \
     && chown -R tomcat:tomcat ${GEOSERVER_INSTALL_DIR}
 
 # Modify tomcat server.xml file to deal with reverse proxy
@@ -137,6 +137,6 @@ ADD keycloak_config.py /user/local/bin/keycloak_config.py
 ADD start.sh /usr/local/bin/start.sh
 ENTRYPOINT [ "/bin/sh", "/usr/local/bin/start.sh" ]
 
-VOLUME ["${GEOSERVER_DATA_DIR_1}", "${GEOSERVER_EXT_DIR_1}"]
+VOLUME ["${GEOSERVER_DATA_DIR}", "${GEOSERVER_EXT_DIR}"]
 
 EXPOSE 8080
