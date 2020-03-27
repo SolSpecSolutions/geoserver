@@ -137,6 +137,6 @@ ADD keycloak_config.py /user/local/bin/keycloak_config.py
 ADD start.sh /usr/local/bin/start.sh
 ENTRYPOINT [ "/bin/sh", "/usr/local/bin/start.sh" ]
 
-VOLUME ["${GEOSERVER_DATA_DIR}", "${GEOSERVER_EXT_DIR}"]
+VOLUME ["${GEOSERVER_DATA_DIR_1}", "${GEOSERVER_EXT_DIR}"]
 
 EXPOSE 8080
