@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check for Existance of geoserver install, if not then move into place
-if [ ! -f "${GEOSERVER_DATA_DIR}/logging.xml" ]; then
+if [ ! -f "${GEOSERVER_DATA_DIR}/global.xml" ]; then
     cp -Rp "${GEOSERVER_DATA_DIR_1}/*" "${GEOSERVER_DATA_DIR}/"
     cp -Rp "${GEOSERVER_EXT_DIR_1}/*" "${GEOSERVER_EXT_DIR}/"
 fi
